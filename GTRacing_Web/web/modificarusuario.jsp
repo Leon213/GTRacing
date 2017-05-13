@@ -1,7 +1,7 @@
 <%@page import="com.gtracing.users.Usuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if (request.getParameter("id") != null && !request.getParameter("id").equals("")) {
+    if (request.getParameter("user_name") != null && !request.getParameter("user_name").equals("")) {
         int bandera;
         Usuarios misUsuarios = new Usuarios();
         bandera = misUsuarios.modificarUsuario(request.getParameter("user_name"), request.getParameter("first_name"), request.getParameter("middle_name"),

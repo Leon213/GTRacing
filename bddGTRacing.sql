@@ -171,7 +171,7 @@ create table usuarioweb(
     pApellido varchar(40) not null,
     sApellido varchar(40) null,
     userName varchar(15) not null,
-    userPwd varchar(15) not null,
+    userPwd varchar(250) not null,
     fechaNac date not null,
     fechaAdd timestamp
     default current_timestamp,
@@ -181,8 +181,8 @@ create table usuarioweb(
 create table cuentaCompras(
     idCuenta serial not null,
     idWebUser int not null,
-    tarjetaBanco int not null,
-    secureKey int not null,
+    tarjetaBanco varchar(250) not null,
+    secureKey varchar(250) not null,
     cantidadDinero decimal(15, 2) not null,
     constraint pk_cuenta_compras primary key(idCuenta),
     constraint fk_web_user foreign key(idWebUser) references usuarioweb(idWebUser)
@@ -190,7 +190,7 @@ create table cuentaCompras(
 
 create table reservaProducto(
     idReserva varchar(15) not null,
-    totalReverva decimal(15, 2) not null,
+    totalReserva decimal(15, 2) not null,
     idWebUser int not null,
     fechaAdd timestamp
     default current_timestamp,
@@ -201,9 +201,14 @@ create table reservaProducto(
 create table detalleReserva(
     idDetalle serial not null,
     idReserva varchar(15) not null,
+    idRepuesto int null,
+    idAuto int null,
     cantidad int not null,
+    subTotal decimal(15,2) not null,
     constraint pk_detalle_reserva primary key(idDetalle),
-    constraint fk_reserva_deatlle foreign key(idReserva) references reservaProducto(idReserva)
+    constraint fk_reserva_deatlle foreign key(idReserva) references reservaProducto(idReserva),
+    constraint fk_reserva_repuesto foreign key(idRepuesto) references Repuestos(idRepuesto),
+    constraint fk_reserva_auto foreign key(idAuto) references Autos(idAuto)
 );
 
 -- - INGRESO DE DATOS-- -
